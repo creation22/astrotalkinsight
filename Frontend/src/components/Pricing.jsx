@@ -166,7 +166,7 @@ const Pricing = () => {
                     {plans.map((plan) => (
                         <motion.div
                             key={plan.name}
-                            className={`relative bg-white rounded-3xl p-10 transition-all duration-300 flex flex-col text-left h-full group ${plan.locked
+                            className={`relative bg-white rounded-3xl p-6 md:p-10 transition-all duration-300 flex flex-col text-left h-full group ${plan.locked
                                 ? 'opacity-75 cursor-not-allowed'
                                 : 'hover:-translate-y-2 hover:shadow-xl'
                                 } ${plan.popular

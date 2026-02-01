@@ -376,7 +376,7 @@ const BookConsultancy = () => {
                                 </span>
                                 Choose a Date
                             </h2>
-                            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-4">
+                            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-3 md:gap-4">
                                 {generateDates().map((date, idx) => (
                                     <button
                                         key={idx}

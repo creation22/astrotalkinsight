@@ -86,7 +86,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-[100] px-6 py-3 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300">
+      <nav className="fixed top-0 left-0 w-full z-[100] px-4 md:px-6 py-3 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <a href="/" className="font-serif font-bold text-xl md:text-2xl text-slate-900 no-underline">
             AstroTech<span className="text-gold">Wealth</span>
@@ -128,17 +128,17 @@ const Navbar = () => {
 
         {/* Mobile Menu Content */}
         {isOpen && (
-          <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg p-6 flex flex-col gap-4 items-center animate-fadeIn">
-            <a href="/" onClick={() => setIsOpen(false)} className="text-slate-800 font-medium">Home</a>
-            <a href="#services" onClick={() => setIsOpen(false)} className="text-slate-800 font-medium">Services</a>
-            <Link to="/book-consultancy" onClick={() => setIsOpen(false)} className="text-slate-800 font-medium flex items-center gap-1">
+          <div className="md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-lg p-6 flex flex-col gap-2 items-center animate-fadeIn border-t border-slate-100">
+            <a href="/" onClick={() => setIsOpen(false)} className="text-slate-800 font-medium w-full text-center py-3 hover:bg-slate-50 rounded-xl transition-colors">Home</a>
+            <a href="#services" onClick={() => setIsOpen(false)} className="text-slate-800 font-medium w-full text-center py-3 hover:bg-slate-50 rounded-xl transition-colors">Services</a>
+            <Link to="/book-consultancy" onClick={() => setIsOpen(false)} className="text-slate-800 font-medium w-full text-center py-3 hover:bg-slate-50 rounded-xl transition-colors flex items-center justify-center gap-2">
               <Icon icon="ph:video-camera" className="text-lg" />
               Consultancy
             </Link>
             {user ? (
-              <button onClick={() => { handleLogout(); setIsOpen(false); }} className="text-red-500 font-medium">Logout</button>
+              <button onClick={() => { handleLogout(); setIsOpen(false); }} className="text-red-500 font-medium w-full text-center py-3 hover:bg-red-50 rounded-xl transition-colors">Logout</button>
             ) : (
-              <button onClick={() => { openAuthModal('login'); setIsOpen(false); }} className="text-slate-800 font-medium">Sign In</button>
+              <button onClick={() => { openAuthModal('login'); setIsOpen(false); }} className="text-slate-800 font-medium w-full text-center py-3 hover:bg-slate-50 rounded-xl transition-colors">Sign In</button>
             )}
           </div>
         )}

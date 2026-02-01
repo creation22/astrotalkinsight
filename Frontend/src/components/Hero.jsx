@@ -22,15 +22,15 @@ const Hero = () => {
     };
 
     return (
-        <section className="relative min-h-[85vh] flex items-center overflow-hidden px-4 md:px-8 pt-24 md:pt-0 pb-8">
-            <div className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16">
+        <section className="relative min-h-[85vh] flex items-center overflow-hidden px-4 md:px-8 pt-24 md:pt-0 pb-12 md:pb-8">
+            <div className="w-full max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16">
                 <motion.div
                     className="flex-1 max-w-full md:max-w-xl text-center md:text-left z-10"
                     initial="hidden"
                     animate="visible"
                     variants={staggerContainer}
                 >
-                    <motion.h1 variants={fadeInUp} className="text-4xl md:text-5xl lg:text-5xl font-serif font-black leading-[1.2] mb-4 text-slate-900">
+                    <motion.h1 variants={fadeInUp} className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-serif font-black leading-[1.2] mb-4 text-slate-900">
                         Personalized Astrology Guidance for <span className="bg-gradient-to-br from-amber-400 to-amber-600 bg-clip-text text-transparent">Wealth, Career & Life</span>
                     </motion.h1>
                     <motion.p className="text-base md:text-lg text-slate-600 mb-8 max-w-lg mx-auto md:mx-0 leading-relaxed" variants={fadeInUp}>

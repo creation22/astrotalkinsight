@@ -164,7 +164,7 @@ const ConsultationForm = () => {
                     {/* Birth Date Section */}
                     <div>
                         <label className={labelClasses}>Birth Date <span className="text-red-500">*</span></label>
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <select name="birth_month" required className={inputClasses} value={formData.birth_month} onChange={handleChange}>
                                 <option value="">Month</option>
                                 {['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'].map(m => (
@@ -187,7 +187,7 @@ const ConsultationForm = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="grid grid-cols-3 gap-4 mt-1 px-1">
+                        <div className="hidden sm:grid grid-cols-3 gap-4 mt-1 px-1">
                             <span className="text-xs text-slate-500">Month</span>
                             <span className="text-xs text-slate-500">Day</span>
                             <span className="text-xs text-slate-500">Year</span>
@@ -197,7 +197,7 @@ const ConsultationForm = () => {
                     {/* Time of Birth Section */}
                     <div>
                         <label className={labelClasses}>Time of Birth</label>
-                        <div className="grid grid-cols-3 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                             <select name="birth_hour" className={inputClasses} value={formData.birth_hour} onChange={handleChange}>
                                 {[...Array(12)].map((_, i) => (
                                     <option key={i + 1} value={i + 1}>{i + 1}</option>
@@ -213,7 +213,7 @@ const ConsultationForm = () => {
                                 <option value="PM">PM</option>
                             </select>
                         </div>
-                        <div className="grid grid-cols-3 gap-4 mt-1 px-1">
+                        <div className="hidden sm:grid grid-cols-3 gap-4 mt-1 px-1">
                             <span className="text-xs text-slate-500">Hour</span>
                             <span className="text-xs text-slate-500">Minutes</span>
                         </div>

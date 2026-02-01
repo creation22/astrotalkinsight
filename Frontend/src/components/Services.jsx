@@ -53,7 +53,7 @@ const Services = () => {
     ];
 
     return (
-        <section id="services" className="py-12 px-6 md:px-12 bg-white">
+        <section id="services" className="py-20 px-6 md:px-12 bg-transparent">
             <motion.div
                 initial="hidden"
                 whileInView="visible"
@@ -62,16 +62,17 @@ const Services = () => {
                 className="max-w-7xl mx-auto"
             >
                 {/* Header */}
-                <div className="text-center mb-12">
-                    <motion.div variants={item} className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
-                        <Icon icon="ph:sparkle-fill" />
-                        Our Services
+                <div className="text-center mb-16">
+                    <motion.div variants={item} className="flex items-center justify-center gap-2 mb-4">
+                        <div className="h-[1px] w-12 bg-amber-300"></div>
+                        <span className="text-amber-600 font-serif italic text-lg tracking-wide">Our Expertise</span>
+                        <div className="h-[1px] w-12 bg-amber-300"></div>
                     </motion.div>
-                    <motion.h2 variants={item} className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+                    <motion.h2 variants={item} className="text-4xl md:text-5xl font-serif font-black text-slate-900 mb-6 leading-tight">
                         What We Offer
                     </motion.h2>
-                    <motion.p variants={item} className="text-slate-500 max-w-xl mx-auto">
-                        Explore our range of astrological services designed to guide you.
+                    <motion.p variants={item} className="text-lg text-slate-600 font-light max-w-xl mx-auto leading-relaxed">
+                        Explore our range of premium astrological services designed to guide your path to wealth and success.
                     </motion.p>
                 </div>
 
@@ -81,22 +82,22 @@ const Services = () => {
                         <motion.div
                             key={idx}
                             variants={item}
-                            className="relative bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 group hover:-translate-y-1"
+                            className="relative bg-white/60 backdrop-blur-md rounded-2xl p-8 border border-white/50 shadow-sm hover:shadow-xl hover:shadow-amber-500/10 hover:bg-white transition-all duration-300 group hover:-translate-y-2"
                         >
                             {/* Icon */}
-                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4 shadow-md group-hover:scale-110 transition-transform`}>
-                                <Icon icon={service.icon} className="text-white text-xl" />
+                            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mb-6 shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform duration-300">
+                                <Icon icon={service.icon} className="text-white text-2xl" />
                             </div>
 
                             {/* Content */}
-                            <h3 className="text-lg font-bold text-slate-800 mb-2">{service.title}</h3>
-                            <p className="text-slate-500 text-sm mb-4 leading-relaxed">{service.description}</p>
+                            <h3 className="text-xl font-serif font-bold text-slate-900 mb-3 group-hover:text-amber-700 transition-colors">{service.title}</h3>
+                            <p className="text-slate-600 text-sm mb-6 leading-relaxed min-h-[60px]">{service.description}</p>
 
                             {/* Features */}
-                            <ul className="space-y-1.5 mb-4">
+                            <ul className="space-y-2.5 mb-6 border-t border-slate-100 pt-6">
                                 {service.features.map((feature, i) => (
-                                    <li key={i} className="flex items-center gap-2 text-xs text-slate-600">
-                                        <Icon icon="ph:check-circle-fill" className="text-green-500 flex-shrink-0 text-sm" />
+                                    <li key={i} className="flex items-center gap-2.5 text-xs font-medium text-slate-500">
+                                        <Icon icon="ph:star-fill" className="text-amber-400 flex-shrink-0 text-xs" />
                                         {feature}
                                     </li>
                                 ))}
@@ -105,10 +106,10 @@ const Services = () => {
                             {/* CTA Button */}
                             <Link
                                 to={service.link}
-                                className={`inline-flex items-center gap-1 text-sm font-semibold bg-gradient-to-r ${service.color} bg-clip-text text-transparent hover:gap-2 transition-all`}
+                                className="inline-flex items-center gap-2 text-sm font-bold text-amber-600 hover:text-amber-800 transition-all uppercase tracking-wider group-hover:gap-3"
                             >
                                 Learn More
-                                <Icon icon="ph:arrow-right" className="text-amber-500" />
+                                <Icon icon="ph:arrow-right-bold" />
                             </Link>
                         </motion.div>
                     ))}
