@@ -193,6 +193,11 @@ async def generate_report(data: schemas.ReportRequest, current_user: schemas.Use
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Internal server error during report generation: {str(e)}")
 
+@app.get("/")
+async def root():
+    return {"message": "AstroTech API is running"}
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
