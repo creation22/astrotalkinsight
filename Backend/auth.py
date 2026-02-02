@@ -20,15 +20,18 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     try:
-        return pwd_context.verify(plain_password, hashed_password)
+        # Truncate to same length as when hashing
+        truncated_password = plain_password[:72]
+        return pwd_context.verify(truncated_password, hashed_password)
     except Exception as e:
         print(f"Password verification error: {e}")
         return False
 
 def get_password_hash(password: str) -> str:
-    # Truncate to 72 bytes to avoid bcrypt issues
-    password_bytes = password.encode('utf-8')[:72]
-    return pwd_context.hash(password_bytes.decode('utf-8'))
+    # Bcrypt has a 72-byte limit. Truncate password to 72 characters
+    # to be safe (most characters are 1 byte in UTF-8)
+    truncated_password = password[:72]
+    return pwd_context.hash(truncated_password)
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
