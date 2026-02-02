@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroTalk Insight - Deployment Test</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #1a202c;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            color: #718096;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .test-section {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3182ce;
+        }
+
+        .test-section h2 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: auto;
+        }
+
+        .status.loading {
+            background: #edf2f7;
+            color: #4a5568;
+        }
+
+        .status.success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status.error {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .status.warning {
+            background: #feebc8;
+            color: #744210;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .info-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #4a5568;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #1a202c;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+        }
+
+        .btn {
+            background: #3182ce;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #2c5282;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(49, 130, 206, 0.4);
+        }
+
+        .btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .error-details {
+            background: #fff5f5;
+            border: 1px solid #feb2b2;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            color: #742a2a;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3182ce;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .recommendation {
+            background: #fffaf0;
+            border: 2px solid #f6ad55;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .recommendation h3 {
+            color: #744210;
+            margin-bottom: 15px;
+        }
+
+        .recommendation ul {
+            margin-left: 20px;
+            color: #7c2d12;
+        }
+
+        .recommendation li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🚀 Deployment Status Test</h1>
+        <p class="subtitle">Testing AstroTalk Insight Frontend & Backend Integration</p>
+
+        <!-- Environment Check -->
+        <div class="test-section">
+            <h2>
+                🔧 Environment Configuration
+                <span class="status loading" id="env-status">Checking...</span>
+            </h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Current URL</div>
+                    <div class="info-value" id="current-url">-</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Expected API URL</div>
+                    <div class="info-value">https://astrotalkinsight.onrender.com</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Backend Health Check -->
+        <div class="test-section">
+            <h2>
+                ❤️ Backend Health Check
+                <span class="status loading" id="health-status">Testing...</span>
+            </h2>
+            <button class="btn" id="test-health" disabled>
+                <span class="spinner"></span>Testing Backend...
+            </button>
+            <div id="health-result"></div>
+        </div>
+
+        <!-- CORS Check -->
+        <div class="test-section">
+            <h2>
+                🌐 CORS Configuration
+                <span class="status loading" id="cors-status">Testing...</span>
+            </h2>
+            <button class="btn" id="test-cors" disabled>
+                <span class="spinner"></span>Testing CORS...
+            </button>
+            <div id="cors-result"></div>
+        </div>
+
+        <!-- Authentication Test -->
+        <div class="test-section">
+            <h2>
+                🔐 Authentication Test
+                <span class="status loading" id="auth-status">Waiting...</span>
+            </h2>
+            <button class="btn" id="test-signup">Test Signup</button>
+            <button class="btn" id="test-login">Test Login</button>
+            <div id="auth-result"></div>
+        </div>
+
+        <!-- Recommendations -->
+        <div class="recommendation" id="recommendations" style="display: none;">
+            <h3>⚠️ Issues Detected - Recommended Actions:</h3>
+            <ul id="recommendation-list"></ul>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://astrotalkinsight.onrender.com';
+        let testResults = {
+            health: false,
+            cors: false,
+            auth: false
+        };
+
+        // Update current URL
+        document.getElementById('current-url').textContent = window.location.href;
+
+        // Test Backend Health
+        async function testHealth() {
+            const statusEl = document.getElementById('health-status');
+            const btnEl = document.getElementById('test-health');
+            const resultEl = document.getElementById('health-result');
+
+            try {
+                statusEl.className = 'status loading';
+                statusEl.textContent = 'Testing...';
+                btnEl.innerHTML = '<span class="spinner"></span>Testing...';
+
+                const response = await fetch(`${API_URL}/health`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    statusEl.className = 'status success';
+                    statusEl.textContent = '✅ Healthy';
+                    btnEl.innerHTML = '✅ Backend is Healthy';
+                    btnEl.disabled = true;
+                    testResults.health = true;
+
+                    resultEl.innerHTML = `
+                        <div class="info-item" style="margin-top: 15px;">
+                            <div class="info-label">Response</div>
+                            <div class="info-value">${JSON.stringify(data, null, 2)}</div>
+                        </div>
+                    `;
+
+                    // Auto-trigger CORS test
+                    setTimeout(testCORS, 500);
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Failed';
+                btnEl.innerHTML = '🔄 Retry Test';
+                btnEl.disabled = false;
+
+                resultEl.innerHTML = `
+                    <div class="error-details">
+                        Backend Error: ${error.message}
+                        
+                        Possible Causes:
+                        1. Backend is not deployed or down
+                        2. Backend URL is incorrect
+                        3. Network connectivity issues
+                    </div>
+                `;
+
+                testResults.health = false;
+                updateRecommendations();
+            }
+        }
+
+        // Test CORS
+        async function testCORS() {
+            const statusEl = document.getElementById('cors-status');
+            const btnEl = document.getElementById('test-cors');
+            const resultEl = document.getElementById('cors-result');
+
+            try {
+                statusEl.className = 'status loading';
+                statusEl.textContent = 'Testing...';
+                btnEl.innerHTML = '<span class="spinner"></span>Testing...';
+                btnEl.disabled = true;
+
+                const response = await fetch(`${API_URL}/`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    statusEl.className = 'status success';
+                    statusEl.textContent = '✅ OK';
+                    btnEl.innerHTML = '✅ CORS Working';
+                    testResults.cors = true;
+
+                    resultEl.innerHTML = `
+                        <div class="info-item" style="margin-top: 15px; background: #f0fff4; border-color: #9ae6b4;">
+                            <div class="info-label">✅ CORS Headers Configured Correctly</div>
+                            <div class="info-value">Your origin (${window.location.origin}) is allowed by the backend</div>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Failed';
+                btnEl.innerHTML = '🔄 Retry Test';
+                btnEl.disabled = false;
+
+                resultEl.innerHTML = `
+                    <div class="error-details">
+                        CORS Error: ${error.message}
+                        
+                        Your Origin: ${window.location.origin}
+                        Expected API URL: ${API_URL}
+                        
+                        This means the backend needs to add your origin to the allowed CORS origins.
+                    </div>
+                `;
+
+                testResults.cors = false;
+                updateRecommendations();
+            }
+        }
+
+        // Test Signup
+        async function testSignup() {
+            const statusEl = document.getElementById('auth-status');
+            const resultEl = document.getElementById('auth-result');
+
+            const testEmail = `test_${Date.now()}@example.com`;
+            const testPassword = 'TestPass123!';
+            const testName = 'Test User';
+
+            try {
+                statusEl.className = 'status loading';
+                statusEl.textContent = 'Testing...';
+
+                const response = await fetch(`${API_URL}/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: testEmail,
+                        password: testPassword,
+                        full_name: testName
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    statusEl.className = 'status success';
+                    statusEl.textContent = '✅ Working';
+                    testResults.auth = true;
+
+                    resultEl.innerHTML = `
+                        <div class="info-item" style="margin-top: 15px; background: #f0fff4; border-color: #9ae6b4;">
+                            <div class="info-label">✅ Signup Successful</div>
+                            <div class="info-value">Test account created: ${testEmail}</div>
+                        </div>
+                    `;
+
+                    updateRecommendations();
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || `HTTP ${response.status}`);
+                }
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = '❌ Failed';
+
+                resultEl.innerHTML = `
+                    <div class="error-details">
+                        Signup Error: ${error.message}
+                        
+                        Check:
+                        1. Backend database connection
+                        2. Request/response format
+                        3. Network tab in browser console for details
+                    </div>
+                `;
+
+                testResults.auth = false;
+                updateRecommendations();
+            }
+        }
+
+        // Test Login
+        async function testLogin() {
+            const statusEl = document.getElementById('auth-status');
+            const resultEl = document.getElementById('auth-result');
+
+            // Use a known test account or create one first
+            const testEmail = 'test@example.com';
+            const testPassword = 'testpass123';
+
+            try {
+                statusEl.className = 'status loading';
+                statusEl.textContent = 'Testing...';
+
+                const formData = new URLSearchParams();
+                formData.append('username', testEmail);
+                formData.append('password', testPassword);
+
+                const response = await fetch(`${API_URL}/token`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    statusEl.className = 'status success';
+                    statusEl.textContent = '✅ Working';
+                    testResults.auth = true;
+
+                    resultEl.innerHTML = `
+                        <div class="info-item" style="margin-top: 15px; background: #f0fff4; border-color: #9ae6b4;">
+                            <div class="info-label">✅ Login Successful</div>
+                            <div class="info-value">Token received: ${data.access_token.substring(0, 20)}...</div>
+                        </div>
+                    `;
+
+                    updateRecommendations();
+                } else {
+                    const errorData = await response.json();
+                    throw new Error(errorData.detail || `HTTP ${response.status}`);
+                }
+            } catch (error) {
+                statusEl.className = 'status warning';
+                statusEl.textContent = '⚠️ Check';
+
+                resultEl.innerHTML = `
+                    <div class="error-details">
+                        Login Error: ${error.message}
+                        
+                        Note: This might fail if the test account doesn't exist.
+                        Try the Signup test first, or use your actual credentials.
+                    </div>
+                `;
+
+                updateRecommendations();
+            }
+        }
+
+        function updateRecommendations() {
+            const recEl = document.getElementById('recommendations');
+            const listEl = document.getElementById('recommendation-list');
+            const recommendations = [];
+
+            if (!testResults.health) {
+                recommendations.push('Backend is not responding. Check if the Render deployment is active at <a href="https://dashboard.render.com" target="_blank">Render Dashboard</a>');
+            }
+
+            if (!testResults.cors) {
+                recommendations.push(`CORS is blocking requests from ${window.location.origin}. Add this origin to the backend's CORS allowed origins in main.py`);
+            }
+
+            if (!testResults.auth && testResults.health && testResults.cors) {
+                recommendations.push('Backend is healthy but authentication failed. Check MongoDB connection and credentials');
+            }
+
+            if (recommendations.length > 0) {
+                listEl.innerHTML = recommendations.map(r => `<li>${r}</li>`).join('');
+                recEl.style.display = 'block';
+            } else {
+                recEl.style.display = 'none';
+            }
+        }
+
+        // Initialize tests
+        document.getElementById('test-health').onclick = testHealth;
+        document.getElementById('test-cors').onclick = testCORS;
+        document.getElementById('test-signup').onclick = testSignup;
+        document.getElementById('test-login').onclick = testLogin;
+
+        // Auto-start health check
+        setTimeout(() => {
+            document.getElementById('env-status').className = 'status success';
+            document.getElementById('env-status').textContent = '✅ Loaded';
+            document.getElementById('test-health').disabled = false;
+            document.getElementById('test-health').innerHTML = 'Run Health Check';
+            testHealth();
+        }, 500);
+    </script>
+</body>
+
+</html>
