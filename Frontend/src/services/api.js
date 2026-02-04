@@ -41,7 +41,7 @@ api.interceptors.response.use(
 );
 
 export const login = async (email, password) => {
-    // FastAPI expects form-data for OAuth2PasswordRequestForm
+    // FastAPI expects form-data for OAuth2PasswordRequestForm 
     const formData = new URLSearchParams();
     formData.append('username', email);
     formData.append('password', password);
