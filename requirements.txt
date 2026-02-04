@@ -1,1 +1,13 @@
--r Backend/requirements.txt
+fastapi
+uvicorn
+motor
+pydantic
+email-validator
+passlib[bcrypt]
+bcrypt==3.2.2
+python-jose[cryptography]
+python-multipart
+razorpay
+python-dotenv
+pyswisseph
+reportlab
