@@ -4,9 +4,11 @@ const API_URL = window.location.hostname === 'localhost' || window.location.host
     ? 'http://localhost:8000'
     : 'https://astroweathinsights-production.up.railway.app';
 
+console.log('API URL set to:', API_URL);
+
 const api = axios.create({
     baseURL: API_URL,
-    timeout: 30000, // 30 second timeout
+    timeout: 60000, // 60 second timeout for very cold starts
     headers: {
         'Content-Type': 'application/json',
     },
