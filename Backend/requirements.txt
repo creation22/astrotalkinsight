@@ -11,3 +11,5 @@ razorpay
 python-dotenv
 pyswisseph
 reportlab
+certifi
+dnspython
