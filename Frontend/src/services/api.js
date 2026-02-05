@@ -6,7 +6,7 @@ const API_URL = window.location.hostname === 'localhost' || window.location.host
 
 const api = axios.create({
     baseURL: API_URL,
-    timeout: 10000, // 10 second timeout
+    timeout: 30000, // 30 second timeout
     headers: {
         'Content-Type': 'application/json',
     },
